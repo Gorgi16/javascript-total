@@ -1,8 +1,8 @@
 # javascript-total
 
-##Curso de HTML, CSS y Javascript 
+## Curso de HTML, CSS y Javascript 
 
-Nombre: Gorgi Alvarado M.
+## Nombre: Gorgi Alvarado M.
 
 ### Seccion 10-2
 
