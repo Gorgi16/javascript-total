@@ -1,0 +1,12 @@
+h1{
+    font-family:'Courier New', 'Courier New', Courier, monospace;
+    color:blue;
+}
+p{
+    color:aqua(5, 76, 76);
+    border: 1px;
+    border-style:solid;
+}
+#perros{
+    color:brown;
+}

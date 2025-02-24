@@ -1,0 +1,21 @@
+body{
+    background-color: palegoldenrod;
+}
+.principal{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#information{
+    text-align: center;
+    border-style:inset;
+}
+a[href=",edu"]{
+    background-color:gold;
+}
+h1:hover{
+    color: red;
+}
+.principal::first-line{
+    background-color:lightgrey;
+}
+
+
