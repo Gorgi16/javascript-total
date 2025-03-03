@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Ingresos de Usuario 2</title>
+</head>
+
+<body>
+    <p>Ingresa tu Pelicula Favorita</p>
+    <input type="text" id="nombreDePelicula">
+    <button onclick="mostrarPelicula()">Ingresar</button>
+    <h1 id="salida">No se tu Pelicula Favorita</h1>
+
+    <script>
+        function mostrarPelicula(){
+            let elementoNombre = document.getElementById("nombreDePelicula");
+            let elementoTexto = document.getElementById("salida");
+            let mensaje = "Tu Pelicula Favorita es" + elementoNombre.value
+
+            elementoTexto.textContent = mensaje;
+        }
+    </script>
+
+</body>

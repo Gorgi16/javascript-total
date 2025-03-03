@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Ingresos de Usuario 1</title>
+</head>
+
+<body>
+    <p>Ingresa tu anime favorito</p>
+    <input type="text" id="nombreDeAnime">
+    <button onclick="mostrarAnime()">Ingresar</button>
+    <h1 id="salida">No se tu Anime favorito</h1>
+
+    <script>
+        function mostrarAnime(){
+            let elementoNombre = document.getElementById("nombreDeAnime");
+            let elementoTexto = document.getElementById("salida");
+            let mensaje = "Tu Anime favorita es" + elementoNombre.value
+
+
+            elementoTexto.textContent = mensaje;
+        }
+    </script>
+
+</body>
