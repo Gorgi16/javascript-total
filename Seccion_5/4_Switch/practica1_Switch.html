@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Practica Swicth</title>
+    <script src="misScripts.js"></script>
+</head>
+<body>
+    <p>Elija una de las opciones</p>
+    <ol>
+        <li>Manzana</li>
+        <li>Naranja</li>
+        <li>Banana</li>
+    </ol>
+    <input id="numeroFruta" type="Text">
+    <h1>Evaluar parametros</h1>
+    <button onclick="consultarPrecio()">Precio</button>
+
+    <script>
+        function consultarPrecio() {
+    let elementoFruta = document.getElementById("numeroFruta");
+    let fruta = elementoFruta.value;
+
+    switch (fruta)
+    {
+        case "Manzana":
+            alert("$15");
+            break;
+        case "Naranja":
+            alert("$20");
+            break;
+        case "Banana":
+            alert("$25");
+            break;
+    }
+}
+    </script>
+
+    </body>
+
+</html>
