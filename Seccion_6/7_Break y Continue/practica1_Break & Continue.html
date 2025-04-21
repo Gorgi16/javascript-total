@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Break & Continue</title>
+    <style background="red"></style>
+</head>
+<body>
+    <script>
+        let array1 = ['A', 'A', 'B', 'A', 'B', 'B', 'A',];
+
+        for (let numero of array1) {
+            console.log(numero);
+            if (numero < "B") {
+                document.write(numero + "<br>");
+            } else {
+                //continue;
+                break;
+                document.write("letra B detenerse");
+            }
+        }
+
+        document.write("Esto es todo");
+    </script>
+
+</body>
+</html>
