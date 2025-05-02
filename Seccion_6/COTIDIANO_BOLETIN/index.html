@@ -3,7 +3,6 @@
 <head>
     <title>COTIDIANO BOLETIN</title>
     <link rel="stylesheet" href="misEstilos.css">
-    <script src="misScripts.js"></script>
 </head>
 <body>
     <h4>Anexo</h4>
@@ -19,7 +18,47 @@
     
     <h4>Promedio:</h4>
     <button onclick="calcularPromedio()">Calcular Promedio</button>  
+    <h4 id="Respuesta1">---</h4>
     <h4>Nota mas alta:</h4>   
     <button onclick="notaMasAlta()">Buscar Nota mas Alta</button>  
+    <h4 id="Respuesta2">---</h4>
     <h4>¿Hubo un aplazo?</h4>       
-    <button onclick="consultarAplazo()">Consultar Aplazo</button> 
+    <button onclick="Aplazado()">Consultar Aplazo</button> 
+    <h4 id="Respuesta3">---</h4>
+    <br>
+
+    <script>
+        function calcularPromedio(){
+            let elementoPromedio = document.getElementById("Promedio");
+            let elementoRespuesta = document.getElementById("Respuesta1");
+
+            let array1 = [7 + 4 + 8 + 9 + 6];
+            for (let numero of array1){
+            if (numero / 5 ) 
+            elementoPromedio = (numero / 5);
+            elementoRespuesta.textContent = elementoPromedio
+            }
+        }
+        function notaMasAlta(){
+            let elementoNotaMasAlta = document.getElementById("NotaMasAlta");
+            let elementoRespuesta = document.getElementById("Respuesta2");
+            elementoRespuesta.textContent = 9
+        }
+        function Aplazado(){
+            let elementoAplazado = document.getElementById("Aplazado");
+            let elementoRespuesta = document.getElementById("Respuesta3");
+
+           let array1 = [7 + 4 + 8 + 9 + 6];
+        for (let numero of array1){
+            elementoAplazado = (numero / 5)
+            if (numero > 4 && numero <= 4) {
+            elementoRespuesta.textContent = "si"
+           } else {
+              if (elementoAplazado > 4)
+             elementoRespuesta.textContent = "No"
+         }
+    }
+}       
+    </script>
+</body> 
+</html>
