@@ -1,0 +1,12 @@
+h2{
+    color: red;
+}
+body{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+button{
+    background-color:blue;
+    color:white;
+}
