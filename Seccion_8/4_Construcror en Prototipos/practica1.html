@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Practica 1</title>
+</head>
+
+<body>
+    <script>
+        function Restaurante(nombre, direccion, ciudad) {
+            this.nombre = nombre;
+            this.direccion = direccion;
+            this.ciudad = ciudad;
+        }
+
+        let restaurante1 = new Restaurante("Mc Donals", "Frente Calle Melisas", "San Rafel");
+        let restaurante2 = Object.create(restaurante1);
+
+
+        function prototipos() {
+            console.log(restaurante1);
+            alert("Revisa la consola para ver el restaurante2");
+        }
+
+        prototipos();
+    </script>
+</body>
+
+</html>

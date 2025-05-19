@@ -1,0 +1,16 @@
+h2{
+    color: black;
+    border-color: red;
+}
+body{
+    font-family: Arial, sans-serif;
+    margin-top: 50px;
+}
+button{
+    background-color:green;
+    color:white;
+}
+h3{
+    text-align: right;
+    background-color:bisque;
+}
