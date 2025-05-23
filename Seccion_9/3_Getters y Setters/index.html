@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Subclases</title>
+    </head>
+<body>
+    <script>
+        class Deportista{
+            constructor(nombre, apellido){
+                this.nombre = nombre;
+                this.apellido = apellido;
+            }
+        }
+        class Futbolista extends Deportista{
+            constructor(nombre, apellido, goles){
+                super(nombre, apellido);
+                this.goles = goles;
+            }
+            get goles(){
+                return this._goles;
+            }
+
+            set goles(nuevoGoles){
+                this._goles = nuevoGoles
+            }
+        }
+    </script>
+</body>
+</html>

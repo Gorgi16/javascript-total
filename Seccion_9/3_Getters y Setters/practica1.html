@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Practica 1</title>
+    </head>
+<body>
+    <script>
+        class Ciudad{
+            constructor(nombre, ubicacion, cantCiudadanos){
+                this.nombre = nombre;
+                this.ubicacion = ubicacion;
+            }
+            get cantCiudadanos(){
+                return this._cantCiudadanos;
+            }
+
+            set cantCiudadanos(nuevosCiudadanos){
+                this._cantCiudadanos = nuevosCiudadanos
+            }
+        }
+    let Ciudad = new Ciudad("CiudadHotel", "LasVegas", 1992);
+    </script>
+    
+</body>
+</html>
