@@ -1,10 +1,16 @@
 body{
-    background-image: url() ;
+    background-image: url(veterinary-clinic-cartoon-advertisement-vector.jpg) ;
     text-align: center;
-    background-color: aquamarine;
-    color: dodgerblue;
+    background-color: rgb(255, 127, 255);
+    color: rgb(255, 0, 0);
 }
 button{
-    color: brown;
-    background-color:blanchedalmond;
+    color: rgb(255, 255, 255);
+    background-color:rgb(253, 163, 249);
+     font-size: 40px;
+}
+h2{
+  font-size: 59px;
+  text-transform: uppercase;
+  font-weight: 600;
 }
