@@ -1,0 +1,12 @@
+{
+"banco": "BANCO NACIONAL", 
+"sucursal": "NACIONAL, IL", 
+"titular": "MIGUEL FERNANDEZ", 
+"numero_cuenta": "2 567934/09", 
+"saldo": [ 
+{ "moneda": "USD", "monto": 725.09 }, 
+{ "moneda": "EUR", "monto": 195.67 } 
+], 
+"numero de tajeta": "3 5283319753791530", 
+"abierto": "23/06/2019"
+}
