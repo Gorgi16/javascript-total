@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+    <title>Practica 1</title>
+</head>
+<body>
+    <script>
+        function irACocinar(Callbacks){
+            setTimeout(function() {
+                console.log("Llegaste a cocinar");
+                Callbacks();
+                }, 1500);
+            }
+            function jefeTeLlama() {
+                console.log("Comienzas a cocinar");
+            }
+
+            console.log("Llegaste a la cocina");
+            irACocinar(jefeTeLlama);
+            console.log("Te vas a cocinar");
+    </script>
+</body>
+</html>

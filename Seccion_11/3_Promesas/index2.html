@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let promesa1 = new Promise(function(resolve, reject){
+            setTimeout(resolve, 2000, "Hola")
+        })
+        let promesa2 = new Promise(function(resolve, reject){
+            setTimeout(resolve, 6000, "Mundo")
+        })
+        Promise.all([promesa1,promesa2]).then(function(resultados){
+            console.log(resultados)
+        })
+        console.log("El codigo sigue su camino")
+    </script>
+</body>
+</html>

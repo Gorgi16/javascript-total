@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+    <title>Practica 2</title>
+</head>
+<body>
+    <script>
+        function irAlAula(Callbacks){
+            setTimeout(function() {
+                console.log("Dices Bueno Dias");
+                Callbacks();
+                }, 1500);
+            }
+            function profesorTeLlama() {
+                console.log("Te sientas en tu mesa");
+            }
+
+            console.log("Te vas al aula");
+            irAlAula(profesorTeLlama);
+            console.log("Ingresas al aula");   
+    </script>
+</body>
+</html>
