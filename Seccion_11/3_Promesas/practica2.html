@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio 2</title>
+</head>
+
+<body>
+    <script>
+        function getDatos(){
+            return new Promise(function(resolve, reject){
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET', url);
+                xhr.onload = function(){
+                    if(xhr.status === 200) {
+                        resolve(JSON.parse(xhr.responseText));
+                    } else{
+                        reject(xhr.statusText);
+                    }
+                }
+                xhr.send();
+            });
+        }
+        function ejecutar(){
+        getDatos("datos.json")
+        .then(function(Datos){
+            console.log(Datos);
+        })
+        .catch(function(error){
+            console.error(error);
+        });
+    }
+    </script>
+</body>
+</ht

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Practica 1</title>
+</head>
+<body>
+    <script>
+        let miPromesa = new Promise(function(resolve, reject){
+            setTimeout(function(){
+                let error = false;
+                if(error){
+                    reject("La promesa a fallado")
+                }else{
+                    resolve("La promesa se ha cumplido");
+                }
+            })
+        })
+
+        miPromesa.then(function(resultado){
+            console.log(resultado);
+        }).catch(function(error){
+            console.log(error);
+        })
+    </script>
+</body>
+</html>
