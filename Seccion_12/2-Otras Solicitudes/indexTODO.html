@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <title>Fetch a Fondo</title>
+</head>
+<meta charset="UTF-8">
+
+
+
+
+<body>
+    <script>
+        //PUT: Actualizar un recurso por ID
+        async function actualizarPost(id, nuevoTitulo, nuevoContenido) {
+            try {
+               let respuesta = await fetch(`https://api.restful-api.dev/objets/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: id,
+                        title: nuevoTitulo,
+                        body: nuevoContenido
+                    })
+                });
+
+                if (!respuesta.ok) {
+                    throw new Error("No se puede actualizar:" + respuesta.statusText);
+                }
+               let  = await respuesta.json();
+                console.log('Recurso registro:', data);
+
+                 let data = await respuesta.json();
+                console.log('Recurso registro:', data);
+            } catch (error) {
+                console.error('Error al actualizar el registro:', error);
+            }
+        }
+    </script>
+</body>
