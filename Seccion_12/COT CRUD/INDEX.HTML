@@ -1,115 +1,134 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <title>CRUD con JSON Server</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                padding: 20px;
-            }
-            input,
-            button {
-                margin: 5px;
-                padding: 5px;
-            }
-            table,
-            th,
-            td {
-                border: 1px solid black;
-                border-collapse: collapse;
-                padding: 8px;
-            }
-        </style>
-    </head>
-    <body>
-        <h2>Gestión de productos</h2>
+<head>
+    <meta charset="UTF-8" />
+    <title>CRUD con JSON Server</title>
+    <link rel="stylesheet" href="misEstilos.css" />
+    <script src="misScripts.js" defer></script>
+</head>
+<body>
+    <h2>Gestión de productos</h2>
+    <br>
+    <input type="number" id="ID" placeholder="ID" />
+    <input type="text" id="NOMBRE" placeholder="NOMBRE" />
+    <input type="number" id="PRECIO" placeholder="PRECIO" />
+    <input type="text" id="ACCIONES" placeholder="ACCIONES" />
+    <br><br>
+    <button onclick="agregarProducto()">Agregar Producto</button>
+    <button onclick="actualizarPost()">Actualizar POST</button>
 
-        <input type="text" id="nombre" placeholder="Nombre del producto"/>
-        <input type="number" id="precio" placeholder="Precio">
-        <button onclick="agregarProducto()">Agregar Producto</button>
+    <h3>Lista de Productos</h3>
+    <table id="Tabla">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>PRECIO</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody id="tbodyProductos"></tbody>
+    </table>
 
-        <h3>Lista de Productos</h3>
-        <table id="Tabla">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="productos">
-            </tbody>
-        </table>
+    <script>
+        const API_URL = 'https://api.restful-api.dev/objets';
 
-        <script>
-            const API_URL = window.location.origin + "/productos";
-            // Cargar productos al iniciar
-            document.addEventListener('DOMContentLoaded', cargarProductos);
+        function cargarProductos() {
+            fetch(API_URL)
+                .then(res => res.json())
+                .then(data => {
+                    const tbody = document.getElementById('tbodyProductos');
+                    tbody.innerHTML = '';
+                    data.forEach(producto => {
+                        const fila = document.createElement('tr');
 
-            function cargarProductos() {
-                fetch(API_URL)
-                    .then(res => res.json())
-                    .then(data => {
-                        const tbody = document.getElementById('productos');
-                        tbody.innerHTML = "";
-                        data.forEach(p => {
-                            tbody.innerHTML += `
-                                <tr>
-                                    <td>${p.id}</td>
-                                    <td>
-                                        <input value="${p.nombre}" id="nombre-${p.id}" />
-                                    </td>
-                                    <td>
-                                        <input type="number" value="${p.precio}" id="precio-${p.id}">
-                                    </td>
-                                    <td>
-                                        <button onclick="actualizarProducto(${p.id})">Actualizar</button>
-                                        <button onclick="eliminarProducto(${p.id})">Eliminar</button>
-                                    </td>
-                                </tr>`;
-                        });
+                        fila.innerHTML = `
+                            <td>${producto.id}</td>
+                            <td>${producto.NOMBRE}</td>
+                            <td>${producto.PRECIO}</td>
+                            <td>
+                                <button onclick="editarProducto(${producto.id})">Editar</button>
+                                <button onclick="eliminarProducto(${producto.id})">Eliminar</button>
+                            </td>
+                        `;
+                        tbody.appendChild(fila);
                     });
+                })
+                .catch(error => console.error('Error al cargar productos:', error));
+        }
+        function agregarProducto() {
+            const NOMBRE = document.getElementById('NOMBRE').value.trim();
+            const PRECIO = parseFloat(document.getElementById('PRECIO').value);
+            if (!NOMBRE || isNaN(PRECIO)) {
+                alert('Por favor, ingrese un nombre y un precio válido.');
+                return;
             }
 
-            function agregarProducto() {
-                const nombre = document.getElementById('nombre').value.trim();
-                const precio = parseFloat(document.getElementById('precio').value);
-                if (!nombre || isNaN(precio)) {
-                    alert('Por favor, ingrese un nombre y un precio válido.');
-                    return;
-                }
-                fetch(API_URL, {
-                    method: 'POST',
-                    headers: { "Content-type": "application/json" },
-                    body: JSON.stringify({ nombre, precio }),
-                }).then(() => {
-                    document.getElementById('nombre').value = "";
-                    document.getElementById('precio').value = "";
-                    cargarProductos();
-                });
+            fetch(API_URL(`https://api.restful-api.dev/objets`), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ NOMBRE, PRECIO }),
+            })
+            .then(res => res.json())
+            .then(() => {
+                document.getElementById('NOMBRE').value = 'NOMBRE';
+                document.getElementById('PRECIO').value = 'PRECIO';
+                cargarProductos();
+            })
+            .catch(error => console.error('Error al agregar producto:', error));
+        }
+
+       
+        function eliminarProducto(id) {
+            if (!confirm('¿Estás seguro de eliminar este producto?')) return;
+
+            fetch(`${API_URL}/${id}`, {
+                method: 'DELETE',
+            })
+            .then(() => cargarProductos())
+            .catch(error => console.error('Error al eliminar producto:', error));
+        }
+
+        
+        function editarProducto(id) {
+            fetch(`${API_URL}/${id}`)
+                .then(res => res.json())
+                .then(producto => {
+                    document.getElementById('ID').value = producto.id;
+                    document.getElementById('NOMBRE').value = producto.NOMBRE;
+                    document.getElementById('PRECIO').value = producto.PRECIO;
+                })
+                .catch(error => console.error('Error al obtener producto:', error));
+        }
+
+       
+        function actualizarPost() {
+            const id = document.getElementById('ID').value;
+            const NOMBRE = document.getElementById('NOMBRE').value.trim();
+            const PRECIO = parseFloat(document.getElementById('PRECIO').value);
+
+            if (!id || !NOMBRE || isNaN(PRECIO)) {
+                alert('Por favor, complete todos los campos con valores válidos.');
+                return;
             }
 
-            function actualizarProducto(id) {
-                const nombre = document.getElementById(`nombre-${id}`).value.trim();
-                const precio = parseFloat(document.getElementById(`precio-${id}`).value);
-                if (!nombre || isNaN(precio)) {
-                    alert('Por favor, ingrese un nombre y un precio válido.');
-                    return;
-                }
-                fetch(`${API_URL}/${id}`, {
-                    method: 'PUT',
-                    headers: { "Content-type": "application/json" },
-                    body: JSON.stringify({ nombre, precio }),
-                }).then(cargarProductos);
-            }
+            fetch(`${API_URL}/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ NOMBRE, PRECIO }),
+            })
+            .then(res => res.json())
+            .then(() => {
+            
+                document.getElementById('ID').value = '';
+                document.getElementById('NOMBRE').value = '';
+                document.getElementById('PRECIO').value = '';
+                cargarProductos();
+            })
+            .catch(error => console.error('Error al actualizar producto:', error));
+        }
 
-            function eliminarProducto(id) {
-                if (!confirm('¿Está seguro de eliminar este producto?')) return;
-                fetch(`${API_URL}/${id}`, { method: "DELETE" })
-                    .then(cargarProductos);
-            }
-        </script>
-    </body>
+        window.onload = cargarProductos;
+    </script>
+</body>
 </html>
