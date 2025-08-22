@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Visualizacion de Datos</title>
+        <link rel="stylesheet" type="text/css" href="estilo.css">
+    </head>
+    <script>
+        function mostrarDatos() {
+            //Obtener el XML almacenado en localStorage
+            const xmlData = localStorage.getItem('usuarioXML');
+            if (xmlData) {
+                //Pasear el XML
+                /*
+                DOMParser: Es una clase nativa de JavasCript
+                Sirve para convertir un texto con el formato
+                */
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xmlData, "application/xml");
+
+                //Extraer informacion
+                const nombre = xmlDoc.getElementsByTagName("nombre")[0].textContent;
+                textContent;
+                const email = xmlDoc.getElementsByTagName("email")[0].textContent;
+                textContent;
+                const anio = xmlDoc.getElementsByTagName("anio")[0].textContent;
+                textContent;
+
+                //Mostrar la informacion en el HTML
+                document.getElementById("resultado").innerHTML = `
+                    <h2>Datos Resibidos</h2>
+                    <p><strong>Nombre:</strong> ${nombre}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Anio:</strong> ${anio}</p>
+                `;
+            } else {
+                document.getElementById("resultado").innerHTML = `
+                    <h2>No se encontraron datos</h2>
+                `;
+        }
+     }
+        </script>
+    <body onload="mostrarDatos()">
+        <h1>Visualizacion de Datos</h1>
+        <div id="resultado"></div>
+        <button onclick="window.location.href='Formulario.html'">Volver al Formulario</button>
+    </body>
+</html>
