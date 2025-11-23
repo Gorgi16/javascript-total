@@ -33,8 +33,12 @@ function iniciarJuego() {
 }
 
 // esta funcion lo que hace es poner en cada fila una categoria y muestre los mounstruos su daño, turnos y vida a la hora de iniciar la partida
-
 function mostrarTabla() {
+    // aseguro que daniosActuales esté inicializado
+    if (!daniosActuales || daniosActuales.length !== monstruos.length) {
+        generarDaniosAleatorios();
+    }
+
     let html = "<table>";
 
     html += `
@@ -68,7 +72,6 @@ function mostrarTabla() {
 //esta funcion hace que elija un atacante random para use un ataque y luego elige un oponente para restarle la vida
 //dependiendo del daño que hace el ataque y luego muestra un mensaje para saber quien ataco a quien y por cada ataque 
 //que haga se va restando un turno
-
 function ejecutarTurno() {
     if (!juegoIniciado) {
         alert("Inicia una nueva partida.");
@@ -103,7 +106,6 @@ function ejecutarTurno() {
 }
 //en esta funcion se elige al ganador por medio de la vida restante y se termina el juego cuando se queden sin turnos
 //y manda el mensaje final con el nombre del ganador y la vida que le quedo
-
 function juegoTerminado() {
     const vivos = vidas.filter(v => v > 0).length;
     const turnosRestantes = turnos.some(t => t > 0);
@@ -127,4 +129,68 @@ function juegoTerminado() {
         return true;
     }
     return false;
+}
+function guardarPartida() {
+    if (!juegoIniciado) {
+        alert("Inicia una partida antes de guardar.");
+        return;
+    }
+    const datos = {
+        vidas,
+        turnos,
+        daniosActuales,
+        ultimoAtacado,
+        juegoIniciado,
+        fecha: new Date().toLocaleString()
+    };
+    localStorage.setItem("partidaActual", JSON.stringify(datos));
+    alert("Partida guardada correctamente.");
+}
+
+function continuarPartida() {
+    const datos = JSON.parse(localStorage.getItem("partidaActual"));
+    if (!datos) {
+        alert("No hay partida guardada.");
+        return;
+    }
+    vidas = datos.vidas;
+    turnos = datos.turnos;
+    daniosActuales = datos.daniosActuales;
+    ultimoAtacado = datos.ultimoAtacado;
+    juegoIniciado = datos.juegoIniciado;
+    mostrarTabla();
+    document.getElementById("mensaje").textContent = `Partida cargada (${datos.fecha})`;
+}
+
+function guardarHistorial(ganador) {
+    const historial = JSON.parse(localStorage.getItem("historialPartidas")) || [];
+    historial.push({
+        fecha: new Date().toLocaleString(),
+        ganador,
+        vidasFinales: [...vidas]
+    });
+    localStorage.setItem("historialPartidas", JSON.stringify(historial));
+    localStorage.removeItem("partidaActual");
+    mostrarHistorial();
+}
+
+function mostrarHistorial() {
+    const historial = JSON.parse(localStorage.getItem("historialPartidas")) || [];
+    if (historial.length === 0) {
+        document.getElementById("historial").innerHTML = "<p>No hay partidas registradas.</p>";
+        return;
+    }
+    let html = "<h2> Historial de Partidas</h2><ul>";
+    historial.forEach((h, i) => {
+        html += `<li>${i + 1}. Fecha: ${h.fecha} —  <b>${h.ganador}</b> —  Vidas: ${h.vidasFinales.join(", ")}</li>`;
+    });
+    html += "</ul>";
+    document.getElementById("historial").innerHTML = html;
+}
+
+function borrarDatos() {
+    localStorage.removeItem("partidaActual");
+    localStorage.removeItem("historialPartidas");
+    document.getElementById("historial").innerHTML = "<p>No hay partidas registradas.</p>";
+    alert("🗑 Datos borrados correctamente.");
 }
